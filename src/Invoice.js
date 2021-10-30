@@ -50,7 +50,7 @@ const Invoice = ({ data, db, uid }) => {
       invoice["Name"] = current.Name;
       invoice["Qty"] = quantity;
       invoice["Price"] = price * quantity;
-      set(push(ref(db, "invoices/")), invoice);
+      set(push(ref(db, "users/" + uid + "/invoices")), invoice);
 
       // Updating Inventory
       const newQuantity = current.Qty - quantity;

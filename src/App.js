@@ -31,6 +31,7 @@ function App() {
           }
           if (!found) {
             set(ref(db, "users/" + user.uid), { inventory: 0 });
+            set(ref(db, "users/" + user.uid), { invoices: 0 });
           }
         });
       }
