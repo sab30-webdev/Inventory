@@ -3,6 +3,8 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from "firebase/auth";
+// eslint-disable-next-line
+import firebaseApp from "./firebase";
 import { useState, useEffect } from "react";
 import { ref, onValue, getDatabase, set } from "firebase/database";
 import Inventory from "./Inventory";
