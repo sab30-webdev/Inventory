@@ -9,6 +9,7 @@ const Invoice = ({ data, db, uid }) => {
   const [current, setCurrent] = useState(null);
 
   const selectRef = useRef(null);
+  const quantityRef = useRef(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,7 +45,7 @@ const Invoice = ({ data, db, uid }) => {
 
   const generateInvoice = () => {
     // eslint-disable-next-line
-    if (selectRef.current.value != 0) {
+    if (selectRef.current.value != 0 && quantityRef.current.value > 0) {
       // Generating Invoice
       let invoice = {};
       invoice["Name"] = current.Name;
@@ -98,7 +99,12 @@ const Invoice = ({ data, db, uid }) => {
             </Form.Select>
             <Form.Group className="mt-3">
               <Form.Label>Quantity</Form.Label>
-              <Form.Control value={quantity} name="quantity" readOnly />{" "}
+              <Form.Control
+                ref={quantityRef}
+                value={quantity}
+                name="quantity"
+                readOnly
+              />{" "}
               <div className="mt-3">
                 <Button onClick={incQuantity}>+</Button>{" "}
                 <Button onClick={decQuantity}>-</Button>
