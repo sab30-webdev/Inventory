@@ -30,8 +30,7 @@ function App() {
             }
           }
           if (!found) {
-            set(ref(db, "users/" + user.uid), { inventory: 0 });
-            set(ref(db, "users/" + user.uid), { invoices: 0 });
+            set(ref(db, "users/" + user.uid), { inventory: 0, invoices: 0 });
           }
         });
       }
@@ -42,7 +41,7 @@ function App() {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
       {
-        size: "invisible",
+        size: "visible",
         callback: (response) => {
           onSignInSubmit();
         },
@@ -82,7 +81,6 @@ function App() {
         <div className="login">
           <h1>Google Phone Login</h1>
           <form onSubmit={onSignInSubmit}>
-            <div id="recaptcha-container"></div>
             <Form.Control
               type="text"
               placeholder="Phone no"
@@ -94,6 +92,7 @@ function App() {
               placeholder="Password"
               className="phone-input my-3"
             />
+            <div id="recaptcha-container"></div>
             <Button variant="dark" type="submit">
               Submit
             </Button>

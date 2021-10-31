@@ -16,9 +16,6 @@ const Item = ({ data: { pid, Name, Price, Qty }, idx, uid }) => {
       <td>{Qty}</td>
       <td>{Price}</td>
       <td>
-        <Button variant="light">Edit</Button>
-      </td>
-      <td>
         <Button variant="danger" onClick={handleDelete}>
           Delete
         </Button>

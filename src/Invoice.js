@@ -63,6 +63,8 @@ const Invoice = ({ data, db, uid }) => {
       setQuantity(0);
       setPrice(0);
       setCurrent(null);
+
+      alert("Invoice added to the database");
     }
   };
 

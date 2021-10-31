@@ -24,6 +24,10 @@ const Inventory = ({ uid }) => {
   }, [db, uid]);
 
   const add = () => {
+    const { Name, Qty, Price } = data;
+    if (Name === "" || Qty === "" || Price === "") {
+      return;
+    }
     const invenListRef = ref(db, "users/" + uid + "/inventory");
     const newInvenRef = push(invenListRef);
     set(newInvenRef, data);
@@ -74,7 +78,6 @@ const Inventory = ({ uid }) => {
               <th>Item Name</th>
               <th>Quantity</th>
               <th>Price</th>
-              <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
