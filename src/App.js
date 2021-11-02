@@ -1,12 +1,12 @@
+// eslint-disable-next-line
+import firebaseApp from "./firebase";
 import {
   getAuth,
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from "firebase/auth";
-// eslint-disable-next-line
-import firebaseApp from "./firebase";
 import { useState, useEffect } from "react";
-import { ref, onValue, getDatabase, set } from "firebase/database";
+import { ref, getDatabase, get, child, set } from "firebase/database";
 import Inventory from "./Inventory";
 import { Form, Button } from "react-bootstrap";
 import "./App.css";
@@ -19,21 +19,16 @@ function App() {
   useEffect(() => {
     if (user) {
       const db = getDatabase();
-      var found = false;
-      const userRef = ref(db, "users");
-      if (userRef) {
-        onValue(userRef, (snapshot) => {
-          const data = snapshot.val();
-          for (let id in data) {
-            if (user.uid === id) {
-              found = true;
-            }
-          }
-          if (!found) {
+      const dbRef = ref(db);
+      get(child(dbRef, `users/${user.uid}`))
+        .then((snapshot) => {
+          if (!snapshot.exists()) {
             set(ref(db, "users/" + user.uid), { inventory: 0, invoices: 0 });
           }
+        })
+        .catch((error) => {
+          console.error(error);
         });
-      }
     }
   }, [user]);
 

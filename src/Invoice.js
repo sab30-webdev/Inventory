@@ -40,7 +40,7 @@ const Invoice = ({ data, db, uid }) => {
   };
 
   const handlePrice = (e) => {
-    setPrice(e.target.value);
+    setPrice(e.target.value / quantity);
   };
 
   const generateInvoice = () => {
@@ -64,6 +64,17 @@ const Invoice = ({ data, db, uid }) => {
       setQuantity(0);
       setPrice(0);
       setCurrent(null);
+
+      // Display Invoice
+      alert(
+        "INVOICE" +
+          "\nItem Name : " +
+          invoice.Name +
+          "\nQuantity : " +
+          invoice.Qty +
+          "\nPrice : " +
+          invoice.Price
+      );
 
       alert("Invoice added to the database");
     }
